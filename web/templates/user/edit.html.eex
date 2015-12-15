@@ -9,7 +9,7 @@
       <% end %>
     </ul>
 
-    <%= form_for @changeset, user_path(@conn, :create), [class: "form-horizontal"], fn f -> %>
+    <%= form_for @changeset, user_path(@conn, :update, @user), [class: "form-horizontal"], fn f -> %>
       <div class="form-group">
         <label> E-mail </label>
         <%= email_input f, :email, [class: "form-control"] %>
@@ -36,7 +36,7 @@
       </div>
 
       <div class="form-actions">
-        <%= submit "Create User", [class: "btn btn-primary"] %>
+        <%= submit "Update User", [class: "btn btn-primary"] %>
       </div>
     <% end %>
   </div>

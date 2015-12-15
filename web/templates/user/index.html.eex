@@ -1,0 +1,22 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th> E-mail </th>
+      <th> Full Name </th>
+      <th> Actions </th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for user <- @users do %>
+      <tr>
+        <td> <%= user.email %> </td>
+        <td> <%= "#{user.first_name} #{user.last_name}" %> </td>
+        <td>
+          <%= link("Edit", to: user_path(@conn, :edit, user)) %>
+          <span> | </span>
+          <%= link("Delete", to: user_path(@conn, :delete, user), method: "delete", data: [confirm: "Are you sure? This is a destructive action."] ) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

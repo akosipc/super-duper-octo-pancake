@@ -6,11 +6,13 @@ defmodule Bangis.User do
     field :encrypted_password, :string
     field :first_name, :string
     field :last_name, :string
+    field :password, :string, virtual: true
+    field :password_confirmation, :string, virtual: true
 
     timestamps
   end
 
-  @required_fields ~w(email encrypted_password)
+  @required_fields ~w(email password)
   @optional_fields ~w(first_name last_name)
 
   @doc """
@@ -22,7 +24,9 @@ defmodule Bangis.User do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
+    |> unique_constraint(:email)
     |> validate_format(:email, ~r/@/)
+    |> validate_confirmation(:password)
   end
 
 end
