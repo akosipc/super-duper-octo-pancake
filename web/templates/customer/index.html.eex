@@ -1,0 +1,26 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th> Full Name</th>
+      <th> Order Count</th>
+      <th> Actions </th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for customer <- @customers do %>
+      <tr>
+        <td> <%= "#{customer.first_name} #{customer.last_name}" %> </td>
+        <td> 0 </td>
+        <td>
+          <%= link("Show", to: customer_path(@conn, :show, customer)) %>
+          <span> | </span>
+          <%= link("Edit", to: customer_path(@conn, :edit, customer)) %>
+          <span> | </span>
+          <%= link("Delete", to: customer_path(@conn, :delete, customer), method: "delete", data: [confirm: "Are you sure? This is a destructive action."] ) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link("New Customer", to: customer_path(@conn, :new), class: "btn btn-primary") %>
