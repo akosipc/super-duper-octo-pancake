@@ -4,6 +4,8 @@ defmodule Bangis.Category do
   schema "categories" do
     field :name, :string
 
+    has_many :products, Bangis.Product
+
     timestamps
   end
 

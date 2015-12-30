@@ -30,7 +30,7 @@ defmodule Bangis.CategoryController do
         conn
         |> put_flash(:info, "Category created successfully.")
         |> redirect(to: category_path(conn, :index))
-      {:error, changset} ->
+      {:error, changeset} ->
         conn
         |> put_flash(:error, "There were some errors encountered.")
         |> render("new.html", changeset: changeset)
@@ -53,7 +53,7 @@ defmodule Bangis.CategoryController do
     end
   end
 
-  def destroy(conn, %{"id" => id}) do
+  def delete(conn, %{"id" => id}) do
     category = Repo.get!(Category, id)
     Repo.delete!(category)
 

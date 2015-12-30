@@ -52,7 +52,7 @@ defmodule Bangis.UserController do
     end
   end
 
-  def destroy(conn, %{"id" => id}) do
+  def delete(conn, %{"id" => id}) do
     user = Repo.get!(User, id)
     Repo.delete!(user)
 

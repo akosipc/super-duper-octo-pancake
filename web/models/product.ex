@@ -21,10 +21,12 @@ defmodule Bangis.Product do
 
     field :current_step,  :string
 
+    belongs_to :category, Bangis.Category
+
     timestamps
   end
 
-  @required_fields ~w(item_code variant name)
+  @required_fields ~w(item_code variant name category_id)
   @optional_fields ~w(color size description)
 
   @doc """

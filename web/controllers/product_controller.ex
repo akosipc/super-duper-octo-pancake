@@ -2,17 +2,20 @@ defmodule Bangis.ProductController do
   use Bangis.Web, :controller
 
   alias Bangis.Product
+  alias Bangis.Category
 
   plug :scrub_params, "product" when action in [:create, :update]
 
   def index(conn, _params) do
-    products = Repo.all(Product)
+    products = Repo.all from p in Product, preload: [:category]
     render(conn, "index.html", products: products)
   end
 
   def new(conn, _params) do
     changeset = Product.changeset(%Product{})
-    render(conn, "new.html", changeset: changeset)
+    categories = Repo.all from(c in Category, select: {c.name, c.id})
+
+    render(conn, "new.html", changeset: changeset, categories: categories)
   end
 
   def edit(conn, %{"id" => id}) do
@@ -58,7 +61,7 @@ defmodule Bangis.ProductController do
     end
   end
 
-  def destroy(conn, %{"id" => id}) do
+  def delete(conn, %{"id" => id}) do
     product = Repo.get!(Product, id)
     Repo.delete!(product)
 

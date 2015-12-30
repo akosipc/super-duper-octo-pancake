@@ -20,6 +20,7 @@ defmodule Bangis.Router do
     resources "/users", UserController
     resources "/categories", CategoryController
     resources "/products", ProductController
+    resources "/customers", CustomerController
   end
 
   # Other scopes may use custom stacks.

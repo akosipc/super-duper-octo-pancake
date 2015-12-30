@@ -5,6 +5,8 @@ defmodule Bangis.Customer do
     field :first_name
     field :last_name
 
+    has_many :orders, Bangis.Order
+
     timestamps
   end
 
