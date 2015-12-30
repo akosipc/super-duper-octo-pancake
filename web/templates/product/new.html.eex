@@ -1,0 +1,78 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <ul>
+      <%= for {title, error} <- @changeset.errors do %>
+        <li>
+          <%= title %>
+          <%= error %>
+        </li>
+      <% end %>
+    </ul>
+
+    <%= form_for @changeset, product_path(@conn, :create), [class: "form-horizontal"], fn f -> %>
+      <div class="form-group">
+        <%= label f, :item_code %>
+        <%= text_input f, :item_code, [class: "form-control"] %>
+      </div>
+
+      <div class="form-group">
+        <%= label f, :variant %>
+        <%= text_input f, :variant, [class: "form-control"] %>
+      </div>
+
+      <div class="form-group">
+        <%= label f, :name %>
+        <%= text_input f, :name, [class: "form-control"] %>
+      </div>
+      
+      <hr/>
+
+      <div class="form-group">
+        <%= label f, :color %>
+        <%= text_input f, :color, [class: "form-control"] %>
+      </div>
+
+      <div class="form-group">
+        <%= label f, :size %>
+        <%= text_input f, :size, [class: "form-control"] %>
+      </div>
+
+      <div class="form-group">
+        <%= label f, :description %>
+        <%= textarea f, :description, [class: "form-control"] %>
+      </div>
+
+      <hr/>
+
+      <div class="form-group">
+        <%= label f, :asana_url %>
+        <%= url_input f, :asana_url, [class: "form-control"] %>
+      </div>
+
+      <div class="form-group">
+        <%= label f, :esty_url %>
+        <%= url_input f, :esty_url, [class: "form-control"] %>
+      </div>
+
+      <div class="form-group">
+        <%= label f, :facebook_url %>
+        <%= url_input f, :facebook_url, [class: "form-control"] %>
+      </div>
+
+      <div class="form-group">
+        <%= label f, :instagram_url %>
+        <%= url_input f, :instagram_url, [class: "form-control"] %>
+      </div>
+
+      <div class="form-group">
+        <%= label f, :others %>
+        <%= url_input f, :others, [class: "form-control"] %>
+      </div>
+
+
+      <div class="form-actions">
+        <%= submit "Create Product", [class: "btn btn-primary"] %>
+      </div>
+    <% end %>
+  </div>
+</div>

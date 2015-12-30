@@ -19,6 +19,7 @@ defmodule Bangis.Router do
     get "/", PageController, :index
     resources "/users", UserController
     resources "/categories", CategoryController
+    resources "/products", ProductController
   end
 
   # Other scopes may use custom stacks.

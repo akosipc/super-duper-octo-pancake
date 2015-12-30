@@ -46,7 +46,7 @@ defmodule Bangis.CategoryController do
         conn
         |> put_flash(:info, "Category successfully updated.")
         |> redirect(to: category_path(conn, :index))
-      {:error = changeset} ->
+      {:error, changeset} ->
         conn
         |> put_flash(:error, "There were some errors encountered")
         |> render("edit.html", changeset: changeset, category: category)
