@@ -18,6 +18,7 @@ defmodule Bangis.Product do
     field :facebook_url,  :string
     field :instagram_url, :string
     field :others,        :string
+    field :price,         :float
 
     field :current_step,  :string
 
@@ -26,7 +27,7 @@ defmodule Bangis.Product do
     timestamps
   end
 
-  @required_fields ~w(item_code variant name category_id)
+  @required_fields ~w(item_code variant name category_id price)
   @optional_fields ~w(color size description)
 
   @doc """
@@ -44,6 +45,7 @@ defmodule Bangis.Product do
     |> validate_format(:facebook_url, ~r/http:\/\//)
     |> validate_format(:instagram_url, ~r/http:\/\//)
     |> validate_format(:others, ~r/http:\/\//)
+    |> validate_number(:price, greater_than: 0)
   end
 
   def item_to_sku({_, item_code}, {_, variant}) do

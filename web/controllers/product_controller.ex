@@ -21,8 +21,9 @@ defmodule Bangis.ProductController do
   def edit(conn, %{"id" => id}) do
     product = Repo.get!(Product, id)
     changeset = Product.changeset(product)
+    categories = Repo.all from(c in Category, select: {c.name, c.id})
 
-    render(conn, "edit.html", changeset: changeset, product: product)
+    render(conn, "edit.html", changeset: changeset, product: product, categories: categories)
   end
 
   def show(conn, %{"id" => id}) do

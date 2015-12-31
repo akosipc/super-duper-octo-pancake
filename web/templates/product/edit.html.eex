@@ -9,7 +9,7 @@
       <% end %>
     </ul>
 
-    <%= form_for @changeset, product_path(@conn, :update, @product), [class: "form-horizontal"], fn f -> %>
+    <%= form_for @changeset, product_path(@conn, :update, @product), [class: "form-horizontal", multipart: true], fn f -> %>
       <div class="form-group">
         <%= label f, :item_code %>
         <%= text_input f, :item_code, [class: "form-control"] %>
@@ -24,8 +24,23 @@
         <%= label f, :name %>
         <%= text_input f, :name, [class: "form-control"] %>
       </div>
+
+      <div class="form-group">
+        <%= label f, :price %>
+        <%= number_input f, :price, [class: "form-control", min: 1] %>
+      </div>
+
+      <div class="form-group">
+        <%= label f, :category_id %>
+        <%= select f, :category_id, @categories, [prompt: "Choose a category", class: "form-control"] %>
+      </div>
       
       <hr/>
+
+      <div class="form-group">
+        <%= label f, :image_path %>
+        <%= file_input f, :image_path, [class: "form-control"] %>
+      </div>
 
       <div class="form-group">
         <%= label f, :color %>
@@ -74,6 +89,5 @@
         <%= submit "Update Product", [class: "btn btn-primary"] %>
       </div>
     <% end %>
-
   </div>
 </div>
