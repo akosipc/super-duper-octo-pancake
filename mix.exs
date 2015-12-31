@@ -19,7 +19,8 @@ defmodule Bangis.Mixfile do
   def application do
     [mod: {Bangis, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger,
-                    :phoenix_ecto, :postgrex]]
+                    :phoenix_ecto, :postgrex, :arc, :arc_ecto,
+                    :ex_aws, :httpoison]]
   end
 
   # Specifies which paths to compile per environment.
@@ -35,6 +36,10 @@ defmodule Bangis.Mixfile do
      {:postgrex, ">= 0.0.0"},
      {:phoenix_html, "~> 2.1"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
+     {:arc, "~> 0.2.2"},
+     {:arc_ecto, "~> 0.3.1"},
+     {:ex_aws, "~> 0.4.10"},
+     {:httpoison, "~> 0.7"},
      {:cowboy, "~> 1.0"}]
   end
 

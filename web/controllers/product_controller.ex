@@ -51,7 +51,7 @@ defmodule Bangis.ProductController do
     changeset = Product.changeset(product, product_params)
 
     case Repo.update(changeset) do
-      {:ok, product} ->
+      {:ok, _product} ->
         conn
         |> put_flash(:info, "Product updated successfully.")
         |> redirect(to: product_path(conn, :index))

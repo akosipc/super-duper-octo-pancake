@@ -5,7 +5,7 @@ defmodule Bangis.Product do
   before_update :generate_sku
 
   schema "products" do
-    field :image_path,    :string
+    field :image_path,    Bangis.Avatar.Type
     field :item_code,     :string
     field :variant,       :string
     field :name,          :string
@@ -30,6 +30,10 @@ defmodule Bangis.Product do
   @required_fields ~w(item_code variant name category_id price)
   @optional_fields ~w(color size description)
 
+  @required_file_fields ~w()
+  @optional_file_fields ~w(image_path)
+
+
   @doc """
   Creates a changeset based on the `model` and `params`.
 
@@ -39,6 +43,7 @@ defmodule Bangis.Product do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
+    |> cast(params, @required_file_fields, @optional_file_fields)
     |> unique_constraint(:sku)
     |> validate_format(:asana_url, ~r/http:\/\//)
     |> validate_format(:esty_url, ~r/http:\/\//)
@@ -49,12 +54,12 @@ defmodule Bangis.Product do
   end
 
   def item_to_sku({_, item_code}, {_, variant}) do
-    item_code <> variant
+    "#{item_code}-#{variant}"
   end
 
   defp generate_sku(changeset) do
-    changeset = put_change(changeset, :sku, item_to_sku(fetch_field(changeset, :item_code),
-                                                        fetch_field(changeset, :variant)))
+    put_change(changeset, :sku, item_to_sku(fetch_field(changeset, :item_code),
+                                            fetch_field(changeset, :variant)))
   end
 
 end

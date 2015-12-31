@@ -48,7 +48,7 @@ defmodule Bangis.CustomerController do
     changeset = Customer.changeset(customer, customer_params)
 
     case Repo.update(changeset) do
-      {:ok, category} ->
+      {:ok, _customer} ->
         conn
         |> put_flash(:info, "Customer successfully updated.")
         |> redirect(to: customer_path(conn, :index))

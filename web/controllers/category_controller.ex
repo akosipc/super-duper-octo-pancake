@@ -42,7 +42,7 @@ defmodule Bangis.CategoryController do
     changeset = Category.changeset(category, category_params)
 
     case Repo.update(changeset) do
-      {:ok, category} ->
+      {:ok, _category} ->
         conn
         |> put_flash(:info, "Category successfully updated.")
         |> redirect(to: category_path(conn, :index))
