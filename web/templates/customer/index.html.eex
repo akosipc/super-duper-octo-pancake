@@ -16,6 +16,8 @@
           <span> | </span>
           <%= link("Edit", to: customer_path(@conn, :edit, customer)) %>
           <span> | </span>
+          <%= link("Create Order", to: customer_order_path(@conn, :new, customer))%>
+          <span> | </span>
           <%= link("Delete", to: customer_path(@conn, :delete, customer), method: "delete", data: [confirm: "Are you sure? This is a destructive action."] ) %>
         </td>
       </tr>

@@ -1,0 +1,75 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <ul>
+      <%= for {title, error} <- @changeset.errors do %>
+        <li>
+          <%= title %>
+          <%= error %>
+        </li>
+      <% end %>
+    </ul>
+
+    <%= form_for @changeset, customer_order_path(@conn, :create, @customer), [class: "form-horizontal"], fn f -> %>
+
+      <div class="form-group">
+        <%= label f, :payment_type %>
+        <%= select f, :payment_type, ["BPI", "BDO"], [prompt: "Choose a payment type", class: "form-control"] %>
+      </div>
+
+      <div class="form-group">
+        <%= label f, :payment_id, "Transaction Number" %>
+        <%= text_input f, :payment_id, [class: "form-control"] %>
+      </div>
+
+      <div class="form-group">
+        <%= label f, :currency %>
+        <%= select f, :currency, ["PHP"], [prompt: "Choose a currency", class: "form-control"] %>
+      </div>
+
+      <div class="form-group">
+        <%= label f, :amount %>
+        <%= text_input f, :amount, [class: "form-control"] %>
+      </div>
+
+      <div class="form-group">
+        <%= label f, :delivery_by %>
+        <%= select f, :delivery_by, ["LRC", "Xend"], [prompt: "Choose a Courier", class: "form-control"] %>
+      </div>
+
+      <div class="form-group">
+        <%= label f, :delivery_id, "Delivery ID" %>
+        <%= text_input f, :delivery_id, [class: "form-control"] %>
+      </div>
+
+      <hr/>
+
+      <%= inputs_for f, :order_items, fn oi -> %>
+        <div class="form-group">
+          <%= label f, :quantity %>
+          <%= select f, :quantity, 1..100, [class: "form-control"] %>
+        </div>
+
+        <div class="form-group">
+          <%= label f, :product_id %>
+          <%= select f, :product_id, @products, [prompt: "Choose a product", class: "form-control"] %>
+        </div>
+      <% end %>
+
+      <hr/>
+
+      <div class="form-group">
+        <%= label f, :ordered_at %>
+        <%= datetime_select f, :ordered_at, [class: "form-control"] %>
+      </div>
+
+      <div class="form-group">
+        <%= label f, :paid_at %>
+        <%= datetime_select f, :paid_at, [class: "form-control"] %>
+      </div>
+
+      <div class="form-actions">
+        <%= submit "Create Order", [class: "btn btn-primary"] %>
+      </div>
+    <% end %>
+  </div>
+</div>

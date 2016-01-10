@@ -1,0 +1,28 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th> Order Number </th>
+      <th> Ordered At </th>
+      <th> Paid At </th>
+      <th> Order Items </th>
+      <th> Actions </th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for order <- @orders do %>
+      <tr>
+        <td> <%= order.id %> </td>
+        <td> <%= order.ordered_at %> </td>
+        <td> <%= order.paid_at %> </td>
+        <td> 0 </td>
+        <td>
+          <%= link("Show", to: order_path(@conn, :show, order)) %>
+          <span> | </span>
+          <%= link("Edit", to: order_path(@conn, :edit, order)) %>
+          <span> | </span>
+          <%= link("Delete", to: order_path(@conn, :delete, order), method: "delete", data: [confirm: "Are you sure? This is a destructive action."] ) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
